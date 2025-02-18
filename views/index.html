@@ -221,12 +221,38 @@
       });
     }
 
+    // Function to fetch message history
+    function fetchMessageHistory() {
+      fetch('/message/v1/history', {
+        method: 'GET',
+        headers: {
+          'Authorization': `${sessionStorage.getItem('jwtToken')}` // Include JWT token for authorization
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Assuming the data format is an array of messages
+        data.data.forEach(message => {
+          addMessageToChat(message.from, message.message); // Function to display messages in chat
+        });
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+    }
+
     // Function to set up WebSocket connection
     function setupWebSocket() {
       socket = new WebSocket('ws://localhost:8080/message/v1/send'); // Replace with your WebSocket server URL
 
       socket.onopen = function(event) {
         console.log('Connected to WebSocket server.');
+        fetchMessageHistory()
         pendingMessages.forEach(message => {
           socket.send(message);
         });
