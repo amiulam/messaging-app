@@ -1,9 +1,7 @@
 package ws
 
 import (
-	// "github.com/fasthttp/websocket"
 	"context"
-	"fmt"
 	"log"
 	"time"
 
@@ -12,6 +10,7 @@ import (
 	"github.com/kooroshh/fiber-boostrap/app/models"
 	"github.com/kooroshh/fiber-boostrap/app/repository"
 	"github.com/kooroshh/fiber-boostrap/pkg/env"
+	"go.elastic.co/apm"
 )
 
 func ServeWSMessaging(app *fiber.App) {
@@ -30,15 +29,20 @@ func ServeWSMessaging(app *fiber.App) {
 			var msg models.MessagePayload
 
 			if err := c.ReadJSON(&msg); err != nil {
-				fmt.Println("error payload", err)
+				log.Println("error payload", err)
 				break
 			}
 
+			tx := apm.DefaultTracer.StartTransaction("Send Message", "ws")
+			ctx := apm.ContextWithTransaction(context.Background(), tx)
+
 			msg.Date = time.Now()
-			err := repository.InsertNewMessage(context.Background(), msg)
+			err := repository.InsertNewMessage(ctx, msg)
 			if err != nil {
-				fmt.Println(err)
+				log.Println(err)
 			}
+
+			tx.End()
 			broadcast <- msg
 		}
 	}))
@@ -49,7 +53,7 @@ func ServeWSMessaging(app *fiber.App) {
 			for client := range clients {
 				err := client.WriteJSON(msg)
 				if err != nil {
-					fmt.Println("failed to write json: ", err)
+					log.Println("failed to write json: ", err)
 					client.Close()
 					delete(clients, client)
 				}

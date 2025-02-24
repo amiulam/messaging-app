@@ -7,6 +7,7 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/kooroshh/fiber-boostrap/pkg/env"
+	"go.elastic.co/apm"
 )
 
 type ClaimToken struct {
@@ -23,6 +24,8 @@ var MapTokenType = map[string]time.Duration{
 var jwtSecret = []byte(env.GetEnv("JWT_SECRET", ""))
 
 func GenerateToken(ctx context.Context, username, fullname, tokenType string) (string, error) {
+	span, _ := apm.StartSpan(ctx, "GenerateToken", "jwt")
+	defer span.End()
 
 	claimToken := ClaimToken{
 		Username: username,
@@ -45,12 +48,13 @@ func GenerateToken(ctx context.Context, username, fullname, tokenType string) (s
 }
 
 func ValidateToken(ctx context.Context, token string) (*ClaimToken, error) {
+	span, _ := apm.StartSpan(ctx, "ValidateToken", "jwt")
+	defer span.End()
+
 	var (
 		claimToken *ClaimToken
 		ok         bool
 	)
-
-	fmt.Println(token, "from validatetoken")
 
 	jwtToken, err := jwt.ParseWithClaims(token, &ClaimToken{}, func(t *jwt.Token) (interface{}, error) {
 		if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {

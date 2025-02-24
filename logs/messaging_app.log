@@ -1,0 +1,42 @@
+2025/02/23 08:59:41 Failed to connect to database 
+dial tcp [::1]:3307: connect: connection refused
+2025/02/23 09:01:04 Database migrated successfully
+2025/02/23 09:01:24 successfully connected to mongodb
+2025/02/23 09:03:08 failed to get user session on DB  record not found
+2025/02/23 09:03:53 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNpYmFydSIsImZ1bGxfbmFtZSI6InNpIGJhcnUiLCJpc3MiOiJtZXNzYWdpbmdfYXBwIiwiZXhwIjoxNzM5ODYyNzk4LCJpYXQiOjE3Mzk4NTE5OTh9.3ad4IQytE3aQBIv7pjFGqwwI4iVaT_i0BoJS9k92Ck4 from validatetoken
+2025/02/23 09:03:53 failed to parse jwt: token has invalid claims: token is expired
+2025/02/24 09:33:01 Database migrated successfully
+2025/02/24 09:33:01 successfully connected to mongodb
+2025/02/24 09:41:36 failed to parse jwt: token has invalid claims: token is expired
+2025/02/24 09:47:40 Failed to insert user data Error 1062 (23000): Duplicate entry 'cobadulu' for key 'users.uni_users_username'
+2025/02/24 10:59:02 Database migrated successfully
+2025/02/24 10:59:02 successfully connected to mongodb
+2025/02/24 15:45:18 Database migrated successfully
+2025/02/24 15:45:18 successfully connected to mongodb
+2025/02/24 15:46:40 failed to parse jwt: token has invalid claims: token is expired
+2025/02/24 15:47:07 failed to parse jwt: token has invalid claims: token is expired
+2025/02/24 15:54:39 Database migrated successfully
+2025/02/24 15:54:39 successfully connected to mongodb
+2025/02/24 15:56:25 Failed to insert user data Error 1062 (23000): Duplicate entry 'cobadulu' for key 'users.uni_users_username'
+2025/02/24 16:15:42 Database migrated successfully
+2025/02/24 16:15:42 successfully connected to mongodb
+2025/02/24 16:16:44 failed to find message server selection error: context deadline exceeded, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: messaging-app-shard-00-00.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-01.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-02.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, ] }
+2025/02/24 16:19:48 failed to get user session on DB  record not found
+2025/02/24 16:20:36 failed to find message server selection error: context deadline exceeded, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: messaging-app-shard-00-00.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-01.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-02.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, ] }
+2025/02/24 16:23:04 Database migrated successfully
+2025/02/24 16:23:04 successfully connected to mongodb
+2025/02/24 16:24:23 failed to find message server selection error: context deadline exceeded, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: messaging-app-shard-00-02.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-00.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-01.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, ] }
+2025/02/24 16:24:46 failed to find message server selection error: context deadline exceeded, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: messaging-app-shard-00-02.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-00.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-01.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, ] }
+2025/02/24 16:24:57 server selection error: context deadline exceeded, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: messaging-app-shard-00-02.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-00.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-01.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, ] }
+2025/02/24 16:24:58 error payload websocket: close 1001 (going away)
+2025/02/24 16:24:58 failed to write json:  websocket: close sent
+2025/02/24 16:27:09 failed to find message server selection error: context deadline exceeded, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: messaging-app-shard-00-02.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-00.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-01.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, ] }
+2025/02/24 16:28:29 Database migrated successfully
+2025/02/24 16:28:29 successfully connected to mongodb
+2025/02/24 16:31:51 failed to find message server selection error: context deadline exceeded, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: messaging-app-shard-00-02.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-01.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, { Addr: messaging-app-shard-00-00.tjko9.mongodb.net:27017, Type: Unknown, Last error: remote error: tls: internal error }, ] }
+2025/02/24 16:32:11 authorization empty
+2025/02/24 16:48:30 Database migrated successfully
+2025/02/24 16:48:31 successfully connected to mongodb
+2025/02/24 16:52:45 Database migrated successfully
+2025/02/24 16:52:46 successfully connected to mongodb
+2025/02/24 16:54:19 error payload websocket: close 1001 (going away)

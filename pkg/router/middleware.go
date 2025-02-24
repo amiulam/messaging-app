@@ -1,36 +1,40 @@
 package router
 
 import (
-	"fmt"
+	"log"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/kooroshh/fiber-boostrap/app/repository"
 	jwttoken "github.com/kooroshh/fiber-boostrap/pkg/jwt_token"
 	"github.com/kooroshh/fiber-boostrap/pkg/response"
+	"go.elastic.co/apm"
 )
 
 func MiddlewareValidateAuth(ctx *fiber.Ctx) error {
+	span, spanCtx := apm.StartSpan(ctx.Context(), "MiddlewareValidateAuth", "middleware")
+	defer span.End()
+
 	auth := ctx.Get("Authorization")
 	if auth == "" {
-		fmt.Println("authorization empty")
+		log.Println("authorization empty")
 		return response.SendFailureResponse(ctx, fiber.StatusUnauthorized, "unauthorized", nil)
 	}
 
-	_, err := repository.GetUserSessionByToken(ctx.Context(), auth)
+	_, err := repository.GetUserSessionByToken(spanCtx, auth)
 	if err != nil {
-		fmt.Println("failed to get user session on DB ", err)
+		log.Println("failed to get user session on DB ", err)
 		return response.SendFailureResponse(ctx, fiber.StatusUnauthorized, "unauthorized", nil)
 	}
 
-	claim, err := jwttoken.ValidateToken(ctx.Context(), auth)
+	claim, err := jwttoken.ValidateToken(spanCtx, auth)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return response.SendFailureResponse(ctx, fiber.StatusUnauthorized, "unauthorized", nil)
 	}
 
 	if time.Now().Unix() > claim.ExpiresAt.Unix() {
-		fmt.Println("token expired", claim.ExpiresAt)
+		log.Println("token expired", claim.ExpiresAt)
 		return response.SendFailureResponse(ctx, fiber.StatusUnauthorized, "unauthorized", nil)
 	}
 
@@ -41,20 +45,23 @@ func MiddlewareValidateAuth(ctx *fiber.Ctx) error {
 }
 
 func MiddlewareRefreshToken(ctx *fiber.Ctx) error {
+	span, spanCtx := apm.StartSpan(ctx.Context(), "MiddlewareRefreshToken", "middleware")
+	defer span.End()
+
 	auth := ctx.Get("Authorization")
 	if auth == "" {
-		fmt.Println("authorization empty")
+		log.Println("authorization empty")
 		return response.SendFailureResponse(ctx, fiber.StatusUnauthorized, "unauthorized", nil)
 	}
 
-	claim, err := jwttoken.ValidateToken(ctx.Context(), auth)
+	claim, err := jwttoken.ValidateToken(spanCtx, auth)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return response.SendFailureResponse(ctx, fiber.StatusUnauthorized, "unauthorized", nil)
 	}
 
 	if time.Now().Unix() > claim.ExpiresAt.Unix() {
-		fmt.Println("token expired", claim.ExpiresAt)
+		log.Println("token expired", claim.ExpiresAt)
 		return response.SendFailureResponse(ctx, fiber.StatusUnauthorized, "unauthorized", nil)
 	}
 
